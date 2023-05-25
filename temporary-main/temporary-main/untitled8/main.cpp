@@ -1,16 +1,12 @@
-#include <iostream>
-#include <istream>
 
 #include "main.h"
 
 
 
-
 int main() {
 
-    User user;
-    std::cout<<user.getEmail();
-
+    Controller controller;
+    controller.createUser();
 
     return 0;
 }
