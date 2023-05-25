@@ -83,8 +83,3 @@ void Services::isUserValid(User &user) {
         emailValidation(user);
 }
 Services::Services(){};
-
-switch(){
-    case  1: return false;
-    case 2: return false;
-}
