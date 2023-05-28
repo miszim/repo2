@@ -29,36 +29,50 @@ public:
     void setPassword(std::string Password);
 };
 
-
-class Services{
+class authorizationService{
 public:
-    Services();
-
-    bool nameValidation (User &user);
-    bool IsValidName(std::string str);
+    authorizationService();
+    static int lastId;
+    static std::vector<User> userList;
+    void nameValidation (User &user);
+    bool isValidName(std::string str);
     void passwordValidation(User &user);
     bool isValidPassword(bool hasCorrectLength, bool isUpperCase, bool hasSpecialChar);
     bool hasCorrectLength(std::string password);
     bool hasSpecialCharacter(std::string password);
     bool isUpperCase(std::string password);
     void emailValidation(User &user);
-    bool Email_check(std::string email);
-    void isUserValid(User &user);
+    bool emailCheck(std::string email);
+    void isUserValid(User &user, std::vector<User> userList);
+    void isEmailUnique(User user, std::vector<User> userList);
+    void addUserToList(User user, std::vector<User>& userList);
+    void displayUserFromList(int number);
 
 };
 
 class Controller{
-private:
-    std::vector<int> usersIDList = {0};
 public:
     Controller();
-    User createUser();
+    User userRegistery();
     void userID(User &user);
     void insertUserName(User &user);
     void insertUserPassword(User &user);
     void insertUserEmail(User &user);
     void grantID(User &user);
-    Services service;
+    authorizationService service;
+};
+
+class loginService{
+public:
+    loginService();
+    Controller controller;
+    authorizationService AuthorizationService;
+    void loginData();
+    void insertLoginData(User& user);
+    void loginValidation(User insertedUser);
+    bool loginEmailMatch(User insertedUser, User existingUser);
+    bool loginPasswordMatch(User insertedUser, User existingUser);
+
 };
 
 

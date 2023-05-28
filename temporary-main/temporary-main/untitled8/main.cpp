@@ -4,9 +4,13 @@
 
 
 int main() {
-
+    User user;
     Controller controller;
-    controller.createUser();
+    controller.userRegistery();
+    loginService loginservice;
+    loginservice.loginData();
+
 
     return 0;
 }
+

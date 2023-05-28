@@ -35,4 +35,7 @@ void User::setPassword(std::string Password)
 };
 User::User() {
     userID = 0;
+    name ="";
+    email="";
+    password="";
 }
