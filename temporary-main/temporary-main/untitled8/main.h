@@ -18,6 +18,7 @@ private:
     std::string password;
 
 public:
+    static std::vector<User> userList1;
     User();
     int getID();
     void setID(int ID);
@@ -31,9 +32,11 @@ public:
 
 class authorizationService{
 public:
+
     authorizationService();
     static int lastId;
-    static std::vector<User> userList;
+
+
     void nameValidation (User &user);
     bool isValidName(std::string str);
     void passwordValidation(User &user);
@@ -43,38 +46,58 @@ public:
     bool isUpperCase(std::string password);
     void emailValidation(User &user);
     bool emailCheck(std::string email);
-    void isUserValid(User &user, std::vector<User> userList);
-    void isEmailUnique(User user, std::vector<User> userList);
+    void isUserValid(User &user);
+    void isEmailUnique(User user);
+
     void addUserToList(User user, std::vector<User>& userList);
     void displayUserFromList(int number);
 
+
 };
+
 
 class Controller{
 public:
     Controller();
+    authorizationService service;
     User userRegistery();
+
+    void registrationInterface();
     void userID(User &user);
     void insertUserName(User &user);
     void insertUserPassword(User &user);
     void insertUserEmail(User &user);
     void grantID(User &user);
-    authorizationService service;
+
+    void changePassword(std::vector<User>& userList);
 };
 
 class loginService{
 public:
     loginService();
+    User user;
     Controller controller;
     authorizationService AuthorizationService;
     void loginData();
+    void loginInterface();
     void insertLoginData(User& user);
     void loginValidation(User insertedUser);
     bool loginEmailMatch(User insertedUser, User existingUser);
     bool loginPasswordMatch(User insertedUser, User existingUser);
-
 };
 
+
+class graphicalInterface{
+
+public:
+    Controller controller;
+    loginService loginservice;
+    authorizationService AuthorizationService;
+    void userGreetings();
+    void displayFunctions();
+    void userAction(int action);
+
+};
 
 
 

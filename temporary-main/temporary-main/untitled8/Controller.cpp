@@ -2,19 +2,19 @@
 
 User Controller::userRegistery() {
     User user;
-
     try {
         userID(user);
+        registrationInterface();
         insertUserName(user);
         insertUserPassword(user);
         insertUserEmail(user);
-        service.isUserValid(user,service.userList);
+        service.isUserValid(user);
     } catch (std::invalid_argument& e) {
         std::cerr << "User creation failed. Error: " << e.what() << std::endl;
         userRegistery();
     }
     grantID(user);
-    service.addUserToList(user, service.userList);
+    service.addUserToList(user, user.userList1);
     return user;
 }
 
@@ -49,4 +49,18 @@ void Controller::insertUserEmail(User &user)
 void Controller::grantID(User &user) {
     user.setID(authorizationService::lastId++);
 };
+
+void Controller::registrationInterface(){
+    std::cout<<"Welcome!\n To registry a user insert :\n - a username without special characters\n - a password between 9 and 20 characters long with at least one uppercase letter and one special character\n - a email\n";
+};
+
+
+void Controller::changePassword(std::vector<User>& userList){
+    User user;
+};
+
+
+
+
+
 Controller::Controller(){};

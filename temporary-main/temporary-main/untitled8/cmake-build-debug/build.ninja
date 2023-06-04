@@ -90,6 +90,12 @@ build CMakeFiles/untitled8.dir/loginService.cpp.obj: CXX_COMPILER__untitled8_Deb
   OBJECT_DIR = CMakeFiles\untitled8.dir
   OBJECT_FILE_DIR = CMakeFiles\untitled8.dir
 
+build CMakeFiles/untitled8.dir/userInterface.cpp.obj: CXX_COMPILER__untitled8_Debug C$:/Users/Konik/Desktop/repo2/temporary-main/temporary-main/untitled8/userInterface.cpp || cmake_object_order_depends_target_untitled8
+  DEP_FILE = CMakeFiles\untitled8.dir\userInterface.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\untitled8.dir
+  OBJECT_FILE_DIR = CMakeFiles\untitled8.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target untitled8
@@ -98,7 +104,7 @@ build CMakeFiles/untitled8.dir/loginService.cpp.obj: CXX_COMPILER__untitled8_Deb
 #############################################
 # Link the executable untitled8.exe
 
-build untitled8.exe: CXX_EXECUTABLE_LINKER__untitled8_Debug CMakeFiles/untitled8.dir/main.cpp.obj CMakeFiles/untitled8.dir/Controller.cpp.obj CMakeFiles/untitled8.dir/User.cpp.obj CMakeFiles/untitled8.dir/Services.cpp.obj CMakeFiles/untitled8.dir/loginService.cpp.obj
+build untitled8.exe: CXX_EXECUTABLE_LINKER__untitled8_Debug CMakeFiles/untitled8.dir/main.cpp.obj CMakeFiles/untitled8.dir/Controller.cpp.obj CMakeFiles/untitled8.dir/User.cpp.obj CMakeFiles/untitled8.dir/Services.cpp.obj CMakeFiles/untitled8.dir/loginService.cpp.obj CMakeFiles/untitled8.dir/userInterface.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\untitled8.dir

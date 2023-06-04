@@ -1,6 +1,6 @@
 #include "main.h"
 
-std::vector<User> authorizationService::userList;
+
 int authorizationService::lastId = 0;
 
 void authorizationService::nameValidation(User &user){
@@ -76,38 +76,39 @@ bool authorizationService::emailCheck(std::string email) {
 }
 
 
-void authorizationService::isUserValid(User &user, std::vector<User> userList) {
+void authorizationService::isUserValid(User &user) {
     nameValidation(user);
     passwordValidation(user);
     emailValidation(user);
-    isEmailUnique(user,userList);
+    isEmailUnique(user);
 
 }
 
-void authorizationService::addUserToList(User user, std::vector<User>& userList)
+void authorizationService::addUserToList(User user, std::vector<User>& userList1)
 {
-     authorizationService::userList.push_back(user);
+     User::userList1.push_back(user);
 };
 
 
 void authorizationService::displayUserFromList(int number)
 {
-    User user = authorizationService::userList[number];
+    User user = user.userList1[number];
     std::cout<<user.getName()<< "- name\n";
     std::cout<<user.getPassword()<<" - password\n";
     std::cout<<user.getEmail()<<" - email\n";
 };
 
-void authorizationService::isEmailUnique(User user, std::vector<User> userList)
+void authorizationService::isEmailUnique(User user)
 {
     std::string nameToInsert=user.getEmail();
     User userFromList;
     std::string existingUserName;
-    if(userList.size()>0) {
-        for (int i = 0; i <= userList.size(); i++) {
-            userFromList = userList[0];
+
+    if(user.userList1.size()>0){
+        for(int i = 0; i <=user.userList1.size();i++){
+            userFromList = user.userList1[0];
             existingUserName = userFromList.getEmail();
-            if (nameToInsert == existingUserName) {
+            if(nameToInsert == existingUserName) {
                 throw std::invalid_argument("This email is already taken\n");
             }
         }

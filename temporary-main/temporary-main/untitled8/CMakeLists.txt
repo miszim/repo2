@@ -3,4 +3,4 @@ project(untitled8)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(untitled8 main.cpp main.h Controller.cpp User.cpp Services.cpp loginService.cpp)
+add_executable(untitled8 main.cpp main.h Controller.cpp User.cpp Services.cpp loginService.cpp userInterface.cpp)

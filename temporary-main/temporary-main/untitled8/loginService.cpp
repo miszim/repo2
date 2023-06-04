@@ -1,15 +1,22 @@
 
 #include "main.h"
 
+
+
 void loginService::loginData(){
     User user;
     try {
+        loginInterface();
         insertLoginData(user);
         loginValidation(user);
     }catch (std::invalid_argument& e) {
         std::cerr << e.what();
         loginData();
     }
+};
+
+void loginService::loginInterface(){
+    std::cout<<"Insert email and password to log in\n";
 };
 
 void loginService::insertLoginData(User& user)
@@ -21,9 +28,9 @@ void loginService::insertLoginData(User& user)
 void loginService::loginValidation(User insertedUser){
     bool credentialsMatch = false;
     User tmp;
-    for(int i = 0;i<AuthorizationService.userList.size();i++)
+    for(int i = 0;i<user.userList1.size();i++)
     {
-        tmp = AuthorizationService.userList[i];
+        tmp = user.userList1[i];
         if(loginEmailMatch(insertedUser, tmp))
             if(loginPasswordMatch(insertedUser, tmp))
                 credentialsMatch=true;
@@ -38,7 +45,10 @@ bool loginService::loginEmailMatch(User insertedUser, User existingUser)
     std::string existingEmail;
     insertedEmail = insertedUser.getEmail();
     existingEmail = existingUser.getEmail();
-
+    if(insertedEmail==existingEmail){
+        return true;
+    }
+    return false;
 };
 
 bool loginService::loginPasswordMatch(User insertedUser, User existingUser)
