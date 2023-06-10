@@ -1,6 +1,6 @@
 #include "main.h"
 
-std::vector<User> User::userList1;
+
 
 int User::getID()
 {

@@ -14,7 +14,7 @@ User Controller::userRegistery() {
         userRegistery();
     }
     grantID(user);
-    service.addUserToList(user, user.userList1);
+    service.addUserToList(user, service.userList);
     return user;
 }
 
@@ -54,10 +54,6 @@ void Controller::registrationInterface(){
     std::cout<<"Welcome!\n To registry a user insert :\n - a username without special characters\n - a password between 9 and 20 characters long with at least one uppercase letter and one special character\n - a email\n";
 };
 
-
-void Controller::changePassword(std::vector<User>& userList){
-    User user;
-};
 
 
 

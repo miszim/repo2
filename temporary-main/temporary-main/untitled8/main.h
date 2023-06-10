@@ -18,7 +18,6 @@ private:
     std::string password;
 
 public:
-    static std::vector<User> userList1;
     User();
     int getID();
     void setID(int ID);
@@ -35,7 +34,7 @@ public:
 
     authorizationService();
     static int lastId;
-
+    static std::vector<User> userList;
 
     void nameValidation (User &user);
     bool isValidName(std::string str);
@@ -50,7 +49,7 @@ public:
     void isEmailUnique(User user);
 
     void addUserToList(User user, std::vector<User>& userList);
-    void displayUserFromList(int number);
+    int findUser(std::string email);
 
 
 };
@@ -69,34 +68,49 @@ public:
     void insertUserEmail(User &user);
     void grantID(User &user);
 
-    void changePassword(std::vector<User>& userList);
+
 };
 
-class loginService{
+class Service{
 public:
-    loginService();
+    Service();
     User user;
     Controller controller;
     authorizationService AuthorizationService;
-    void loginData();
+    void loginSystem(User &user);
     void loginInterface();
     void insertLoginData(User& user);
     void loginValidation(User insertedUser);
     bool loginEmailMatch(User insertedUser, User existingUser);
     bool loginPasswordMatch(User insertedUser, User existingUser);
+
+    void passwordSystem();
+    void passwordChangeInterface();
+    void passwordRequirements();
+    void changePassword(std::vector<User>& userList);
+
+
+    void newPasswordInsert(User &user);
+    void passwordChangeAfirmation();
+
+    void exit();
 };
 
 
 class graphicalInterface{
 
 public:
+    User user;
     Controller controller;
-    loginService loginservice;
+    Service loginservice;
     authorizationService AuthorizationService;
     void userGreetings();
     void displayFunctions();
-    void userAction(int action);
-
+    void userAction();
+    void wholeSystem();
+    int insertedAction();
+    void correctSpelling(std::string &insertedAction);
+    int userDecision(std::string insertedAction);
 };
 
 

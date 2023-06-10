@@ -3,34 +3,33 @@
 
 
 
-void loginService::loginData(){
-    User user;
+void Service::loginSystem(User &user){
     try {
         loginInterface();
         insertLoginData(user);
         loginValidation(user);
     }catch (std::invalid_argument& e) {
         std::cerr << e.what();
-        loginData();
+        loginSystem(user);
     }
 };
 
-void loginService::loginInterface(){
+void Service::loginInterface(){
     std::cout<<"Insert email and password to log in\n";
 };
 
-void loginService::insertLoginData(User& user)
+void Service::insertLoginData(User& user)
 {
     controller.insertUserEmail(user);
     controller.insertUserPassword(user);
 };
 
-void loginService::loginValidation(User insertedUser){
+void Service::loginValidation(User insertedUser){
     bool credentialsMatch = false;
     User tmp;
-    for(int i = 0;i<user.userList1.size();i++)
+    for(int i = 0;i<AuthorizationService.userList.size();i++)
     {
-        tmp = user.userList1[i];
+        tmp = AuthorizationService.userList[i];
         if(loginEmailMatch(insertedUser, tmp))
             if(loginPasswordMatch(insertedUser, tmp))
                 credentialsMatch=true;
@@ -39,7 +38,7 @@ void loginService::loginValidation(User insertedUser){
         throw std::invalid_argument("Incorrect Email or Password, try again\n");
 };
 
-bool loginService::loginEmailMatch(User insertedUser, User existingUser)
+bool Service::loginEmailMatch(User insertedUser, User existingUser)
 {
     std::string insertedEmail;
     std::string existingEmail;
@@ -51,7 +50,7 @@ bool loginService::loginEmailMatch(User insertedUser, User existingUser)
     return false;
 };
 
-bool loginService::loginPasswordMatch(User insertedUser, User existingUser)
+bool Service::loginPasswordMatch(User insertedUser, User existingUser)
 {
     std::string insertedPassword;
     std::string existingPassword;
@@ -60,10 +59,51 @@ bool loginService::loginPasswordMatch(User insertedUser, User existingUser)
     if(insertedPassword==existingPassword)
         return true;
     return false;
-
-
 };
 
 
 
-loginService::loginService(){};
+void Service::passwordSystem() {
+    passwordChangeInterface();
+    loginSystem(user);
+    changePassword(AuthorizationService.userList);
+    passwordChangeAfirmation();
+};
+
+void Service::passwordChangeInterface() {
+    std::cout<<"Hello to change your password you must log in : "<<std::endl;
+}
+
+void Service::passwordRequirements(){
+    std::cout<<"Add new password to change your old one, the new password must be between 9 and 20 characters long\n and should contain at least one uppercase letter and one special character and be different than the old one\n";
+};
+
+void Service::newPasswordInsert(User &user){
+    std::string newPassword;
+    std::cin.sync();
+    getline(std::cin, newPassword);
+    user.setPassword(newPassword);
+};
+
+void Service::changePassword(std::vector<User> &userList) {
+    passwordRequirements();
+    newPasswordInsert(userList[AuthorizationService.findUser(user.getEmail())]);
+    try {
+        AuthorizationService.passwordValidation(userList[AuthorizationService.findUser(user.getEmail())]);
+    }catch (std::invalid_argument& e) {
+        std::cerr << "User creation failed. Error: " << e.what() << std::endl;
+        changePassword(userList);
+    }
+};
+void Service::passwordChangeAfirmation(){
+    std::cout<<"The password has been sucesfully changed"<<std::endl;
+};
+
+void Service::exit(){
+    std::exit(0);
+};
+
+
+
+Service::Service(){}
+

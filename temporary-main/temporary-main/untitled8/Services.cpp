@@ -2,6 +2,7 @@
 
 
 int authorizationService::lastId = 0;
+std::vector<User> authorizationService::userList;
 
 void authorizationService::nameValidation(User &user){
     std::string nameToValidate = user.getName();
@@ -84,19 +85,11 @@ void authorizationService::isUserValid(User &user) {
 
 }
 
-void authorizationService::addUserToList(User user, std::vector<User>& userList1)
+void authorizationService::addUserToList(User user, std::vector<User>& userList)
 {
-     User::userList1.push_back(user);
+     userList.push_back(user);
 };
 
-
-void authorizationService::displayUserFromList(int number)
-{
-    User user = user.userList1[number];
-    std::cout<<user.getName()<< "- name\n";
-    std::cout<<user.getPassword()<<" - password\n";
-    std::cout<<user.getEmail()<<" - email\n";
-};
 
 void authorizationService::isEmailUnique(User user)
 {
@@ -104,14 +97,28 @@ void authorizationService::isEmailUnique(User user)
     User userFromList;
     std::string existingUserName;
 
-    if(user.userList1.size()>0){
-        for(int i = 0; i <=user.userList1.size();i++){
-            userFromList = user.userList1[0];
+    if(userList.size()>0){
+        for(int i = 0; i <=userList.size();i++){
+            userFromList = userList[0];
             existingUserName = userFromList.getEmail();
             if(nameToInsert == existingUserName) {
                 throw std::invalid_argument("This email is already taken\n");
             }
         }
+    }
+};
+
+int authorizationService::findUser(std::string email) {
+    int usercounter=0;
+    User userToFind;
+    std::string userEmailToFind;
+    for(int i = 0;i<userList.size();i++){
+        userToFind = userList[i];
+        userEmailToFind = userToFind.getEmail();
+        if(userEmailToFind==email){
+            return usercounter;
+        }
+        usercounter++;
     }
 };
 
@@ -132,7 +139,6 @@ void authorizationService::isEmailUnique(User user)
 
 
 
+authorizationService::authorizationService(){}
 
 
-
-authorizationService::authorizationService(){};
